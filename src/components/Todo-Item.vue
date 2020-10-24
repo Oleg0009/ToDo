@@ -28,18 +28,18 @@ export default {
 <style scoped>
 .todo-item{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     border-bottom:1px black solid;
 }
 .remove{
-        color: white;
-        font-weight: 700;
-        font-size: 20px;
-        border-radius: 20px;
-        background-color: red;
-        width: 30px;
-        height: 30px;
+    color: white;
+    font-weight: 700;
+     border: none;
+    font-size: 20px;
+    background-color: red;
+    width: 60px;
+    height: 30px;
 }
 .remove:focus{
     outline: none;

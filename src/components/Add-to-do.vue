@@ -1,8 +1,8 @@
 <template>
     <div class="add-to-do">
-      <input type="text" placeholder="Add to do">
+      <input type="text" v-model="title" placeholder="Add to do">
         <button class="add" 
-        @click="$emit('add-todo',todo)">+</button>
+        @click="addTodo">+</button>
     </div>
 </template>
 
@@ -11,13 +11,21 @@
 export default {
     data(){
         return{
-
+            title:''
         }
 
     },
-    components:{
-
-    }
+    methods: {
+        addTodo() {
+            console.log(this.title)
+            let todo={
+                id: Date.now(),
+                title:this.title,
+                completed:false
+            }
+            this.$emit('add-todo',todo);
+        }
+    },
 }
 </script>
 
@@ -27,13 +35,13 @@ export default {
     margin: 10px;
 }
 .add{
-        color: white;
-        font-weight: 700;
-        font-size: 20px;
-        border-radius: 20px;
-        background-color: red;
-        width: 30px;
-        height: 30px;
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+    border: none;
+    background-color: red;
+    width: 60px;
+    height: 30px;
 }
 
 .add:focus{

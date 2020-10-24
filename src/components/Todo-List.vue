@@ -1,9 +1,11 @@
 <template>
     <div class="todo-wrapper">
         <h2>To-Do List</h2>
-        <AddTodo></AddTodo>
+        <AddTodo
+        @add-todo="addTodo"
+        ></AddTodo>
         <hr>
-        <div class="todo-block" v-if="todos.length==0">
+        <div class="todo-block" v-if="todos.length">
             <TodoItem 
             :key="todo.id" 
             :todo="todo"
@@ -18,7 +20,6 @@
 
 
 <script>
-
 import TodoItem from './Todo-Item';
 import AddTodo from './Add-to-do';
 
@@ -40,8 +41,11 @@ export default {
     },
     methods: {
         removeTodo(id){
-            console.log(id)
             this.todos=this.todos.filter(t => t.id != id );
+        },
+        addTodo(todo) {
+            console.log(todo)
+            this.todos.push(todo);
         }
     },  
 }
