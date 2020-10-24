@@ -1,44 +1,58 @@
 <template>
     <div class="todo-wrapper">
-        <h2>To-Do List</h2>
-        <AddTodo
-        @add-todo="addTodo"
-        ></AddTodo>
-        <hr>
-        <div class="todo-block" v-if="todos.length">
-            <TodoItem 
-            :key="todo.id" 
-            :todo="todo"
-            @remove-todo="removeTodo" 
-             v-for="todo in todos"></TodoItem>
-        </div>
-        <div v-else>
-           Empty
-        </div>
+
+       
+            <h2>To-Do List</h2>
+            <AddTodo
+            @add-todo="addTodo"
+            ></AddTodo>
+            <hr>
+            <div v-if="loading"><Loader></Loader>  </div>
+            <div class="todo-block" v-else-if="todos.length">
+                <TodoItem 
+                :key="todo.id" 
+                :todo="todo"
+                @remove-todo="removeTodo" 
+                v-for="todo in todos"></TodoItem>
+            </div>
+            <div v-else>
+            Empty
+            </div>
+          
+          
+     
     </div>
 </template>
 
 
 <script>
 import TodoItem from './Todo-Item';
+import Loader from './Loader';
 import AddTodo from './Add-to-do';
 
 export default {
 
     data() {
         return { 
-            todos:[]
+            todos:[],
+            loading:true
         }
 
     },
     components:{
         TodoItem,
-        AddTodo
+        AddTodo,
+        Loader
     },
     mounted() {
         fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
         .then(response => response.json())
-        .then(json => this.todos=json)
+        .then(json =>{ 
+            setTimeout(()=>{
+                this.loading = false;
+                this.todos=json;
+            },1000)
+        })
     },
     methods: {
         removeTodo(id){
