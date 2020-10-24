@@ -27,17 +27,18 @@ export default {
 
     data() {
         return { 
-            todos:[
-                { id:1 , title: "Work", completed: false },
-                { id:2 , title: "Study", completed: false },
-                { id:3 , title: "English", completed: false }
-            ]
+            todos:[]
         }
 
     },
     components:{
         TodoItem,
         AddTodo
+    },
+    mounted() {
+        fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
+        .then(response => response.json())
+        .then(json => this.todos=json)
     },
     methods: {
         removeTodo(id){

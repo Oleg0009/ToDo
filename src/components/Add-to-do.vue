@@ -15,15 +15,18 @@ export default {
         }
 
     },
+ 
     methods: {
         addTodo() {
-            console.log(this.title)
-            let todo={
-                id: Date.now(),
-                title:this.title,
-                completed:false
+            if (this.title){
+                let todo={
+                    id: Date.now(),
+                    title:this.title,
+                    completed:false
+                }
+                this.$emit('add-todo',todo);
             }
-            this.$emit('add-todo',todo);
+           
         }
     },
 }
