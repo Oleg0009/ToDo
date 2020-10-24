@@ -2,7 +2,8 @@
     <div class="todo-item">
          <p :class="{ done: todo.completed }">
              <input type="checkbox" @change=" todo.completed =! todo.completed ">
-             {{todo.title}}
+             {{index+1}}
+             {{todo.title | upperCase}}
         </p>
         <button class="remove" 
         @click="$emit('remove-todo',todo.id)">-</button>
@@ -17,10 +18,13 @@ export default {
         todo:{
             type: Object,
             required:true
-        }
+        },
+        index:Number
     },
-    components:{
-
+    filters:{
+        upperCase(value){
+            return value.toUpperCase();
+        }
     }
 }
 </script>
